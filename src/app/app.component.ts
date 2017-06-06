@@ -6,6 +6,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  filteredStatus = '';
+  appStatus = new Promise((resolve, reject) => {
+    setTimeout(()=>{
+      resolve('stable');
+    }, 2000)
+  })
+  
   servers = [
     {
       instanceType: 'medium',
@@ -15,7 +23,7 @@ export class AppComponent {
     },
     {
       instanceType: 'large',
-      name: 'User Database',
+      name: 'User DB',
       status: 'stable',
       started: new Date(2017, 6, 2)
     },
@@ -28,7 +36,7 @@ export class AppComponent {
     {
       instanceType: 'small',
       name: 'Testing Environment Server',
-      status: 'stable',
+      status: 'critical',
       started: new Date(2017, 6, 4)
     }
   ];
@@ -38,5 +46,14 @@ export class AppComponent {
       'list-group-item-warning': server.status === 'offline',
       'list-group-item-danger': server.status === 'critical'
     };
+  }
+
+  onAddServer(){
+    this.servers.push( {
+      instanceType: 'small',
+      name: 'Testing Aizoon Server',
+      status: 'offline',
+      started: new Date(2017, 6, 4)
+    })
   }
 }
