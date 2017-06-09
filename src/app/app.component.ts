@@ -6,6 +6,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  appStatus = new Promise(
+    (resolve, reject) => {
+      setTimeout( () => {
+        resolve('stabile')
+      }, 2500)
+    });
+    
+  filterStatus = '';
   servers = [
     {
       instanceType: 'medium',
@@ -32,6 +40,15 @@ export class AppComponent {
       started: new Date(2017, 6, 4)
     }
   ];
+
+  onAddServer(){
+    this.servers.push({
+      instanceType: 'small',
+      name: 'Test Aizoon Server',
+      status: 'offline',
+      started: new Date(2017, 6, 9)
+    })
+  }
   getStatusClasses(server: {instanceType: string, name: string, status: string, started: Date}) {
     return {
       'list-group-item-success': server.status === 'stable',
