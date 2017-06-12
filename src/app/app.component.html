@@ -1,10 +1,25 @@
 <div class="container">
   <div class="row">
-{{ appStatus | async }}
+<!--{{ appStatus | async }}-->
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-      <input type="text" [(ngModel)]="filterStatus">
+      <!--<input type="text" [(ngModel)]="filterStatus">-->
       <hr>
-      <button type="button" class="btn btn-primary" (click)="onAddServer()">Aggiungi server</button>
+      <div class="row">
+        <div class="col-md-4">
+          <input type="text"  [(ngModel)]="serverName" class="form-control">
+        </div>
+        <div class="col-md-4">
+          <select [(ngModel)]="serverStatus" class="form-control">
+              <option value="stable">Stable</option>
+              <option value="offline">Offline</option>
+              <option value="critical">Critical</option>
+          </select>
+        </div>
+        <div class="col-md-4">
+          <button type="button" class="btn btn-primary" (click)="onAddServer()">Aggiungi server</button>
+        </div>
+      </div>
+      <br><br>
       <ul class="list-group">
         <li
           class="list-group-item"
@@ -14,7 +29,7 @@
             class="badge">
             {{ server.status }}
           </span>
-          <strong>{{ server.name | shorten:15 }}</strong> | {{ server.instanceType | uppercase }} | {{ server.started | date:'fullDate'}}
+          <strong>{{ server.name | shorten:15 }}</strong> ( ID: {{ server.id }} )  {{ server.started | date:'fullDate'}}
         </li>
       </ul>
     </div>
