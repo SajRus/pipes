@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { ShortenPipe } from "app/shorten.pipe";
 import { FilterPipe } from './filter.pipe';
+import { ServerService } from "app/server.service";
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { FilterPipe } from './filter.pipe';
     FormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [ServerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

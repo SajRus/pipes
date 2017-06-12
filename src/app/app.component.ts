@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { ServerService } from "app/server.service";
+import { Response } from "@angular/http"; 
+
 
 @Component({
   selector: 'app-root',
@@ -6,9 +9,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-
+  constructor(private serverService: ServerService){}
+   
   serverName = '';
   serverStatus = 'stable';
+  appName = this.serverService.getAppName();
 
   appStatus = new Promise(
     (resolve, reject) => {
@@ -52,6 +57,29 @@ export class AppComponent {
       status: this.serverStatus,
       started: new Date(2017, 6, 9)
     })
+  }
+
+  onStoreServer(){
+    this.serverService.storeServers(this.servers).subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (error) => console.log(error)
+    )
+  }
+
+  onGetServer(){
+    this.serverService.getServers().subscribe(
+      // (response: Response) => {
+      //   const data = response.json();
+      //   console.log(data)
+      // },
+      (servers: any[])=> {
+          console.log(servers);
+          this.servers = servers;
+      },
+      (error) => console.log(error)
+    )
   }
   getStatusClasses(server: {instanceType: number, name: string, status: string, started: Date}) {
     return {

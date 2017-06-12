@@ -3,20 +3,28 @@
 <!--{{ appStatus | async }}-->
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
       <!--<input type="text" [(ngModel)]="filterStatus">-->
+      {{appName | async}}
       <hr>
+     
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
           <input type="text"  [(ngModel)]="serverName" class="form-control">
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
           <select [(ngModel)]="serverStatus" class="form-control">
               <option value="stable">Stable</option>
               <option value="offline">Offline</option>
               <option value="critical">Critical</option>
           </select>
         </div>
-        <div class="col-md-4">
-          <button type="button" class="btn btn-primary" (click)="onAddServer()">Aggiungi server</button>
+        <div class="col-md-2">
+          <button type="button" class="btn btn-primary" (click)="onAddServer()">Aggiungi</button>
+        </div>
+         <div class="col-md-2">
+          <button type="button" class="btn btn-success" (click)="onStoreServer()">Salva</button>
+        </div>
+         <div class="col-md-2">
+          <button type="button" class="btn btn-primary" (click)="onGetServer()">Aggiorna</button>
         </div>
       </div>
       <br><br>
